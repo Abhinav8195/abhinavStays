@@ -12,15 +12,21 @@ const Datatable = ({columns}) => {
   const [list,setList]= useState([]);
   const {data,loading,error} = useFetch(`https://abhinavstays.onrender.com/api/${path}`)
 
-  const handleDelete =async (id) => {
-    try{
-      await axios.delete(`https://abhinavstays.onrender.com/api/${path}/${id}`)
+  const handleDelete = async (id) => {
+    const token = localStorage.getItem("access_token");
+  
+    try {
+      await axios.delete(`https://abhinavstays.onrender.com/api/${path}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       setList(list.filter((item) => item._id !== id)); 
-    }catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-    
   };
+
 
   useEffect(()=>{
     setList(data)
