@@ -23,21 +23,22 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("https://abhinavstays.onrender.com/api/auth/login", credentials);
-      if (res.data.isAdmin) {
-        dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+        const res = await axios.post("/api/auth/login", credentials);
 
-        navigate("/");
-      } else {
-        dispatch({
-          type: "LOGIN_FAILURE",
-          payload: { message: "You are not allowed!" },
-        });
-      }
+        if (res.data.isAdmin) {
+            localStorage.setItem("accessToken", res.data.accessToken);
+            dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+            navigate("/");
+        } else {
+            dispatch({
+                type: "LOGIN_FAILURE",
+                payload: { message: "You are not allowed!" },
+            });
+        }
     } catch (err) {
-      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+        dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
-  };
+};
 
   return (
     <div className="login">
