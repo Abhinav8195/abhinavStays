@@ -4,7 +4,7 @@ import useFetch from '../../hooks/useFetch';
 
 const FeaturedProperties = () => {
 
-  const { data, loading, error } = useFetch("/api/hotels?featured=true");
+  const { data, loading, error } = useFetch("https://abhinavstays.onrender.com/api/hotels?featured=true");
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading data.</div>;
 

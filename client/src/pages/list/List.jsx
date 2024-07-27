@@ -29,7 +29,7 @@ const List = () => {
     maxPrice: '',
   });
 
-  const { data, loading, error, reFetch } = useFetch(`/api/hotels?city=${destination}&min=${min || 0}&max=${max || 999}`);
+  const { data, loading, error, reFetch } = useFetch(`https://abhinavstays.onrender.com/api/hotels?city=${destination}&min=${min || 0}&max=${max || 999}`);
   const { dispatch } = useContext(SearchContext);
 
   const handleOptionChange = (e) => {
