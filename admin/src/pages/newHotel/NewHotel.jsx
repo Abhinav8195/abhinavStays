@@ -15,7 +15,7 @@ const NewHotel = () => {
   const [isAdmin, setIsAdmin] = useState(false); // State to store admin status
   const navigate = useNavigate(); // For navigation
 
-  const { data, loading, error } = useFetch("/api/rooms");
+  const { data, loading, error } = useFetch("https://abhinavstays.onrender.com/api/rooms");
 
   useEffect(() => {
     // Check if the user is an admin from local storage
@@ -75,7 +75,7 @@ const NewHotel = () => {
         photos: list,
       };
 
-      await axios.post("/api/hotels", newhotel);
+      await axios.post("https://abhinavstays.onrender.com/api/hotels", newhotel);
       alert("Hotel added successfully!"); // Show success message
     } catch (err) {
       console.log(err);
