@@ -12,14 +12,17 @@ const { verifyAdmin } = require('../utils/verifyToken');
 const router = express.Router();
 
 // Create
-router.post('/:hotelid', verifyAdmin, createRoom);
+//verify admin
+router.post('/:hotelid', createRoom);
 
 // Update
-router.put('/:id', verifyAdmin, updateRoom);
+//verifyadmin in 1 
+router.put('/:id', updateRoom);
 router.put('/availability/:id', updateRoomAvailability);
 
 // Delete
-router.delete('/:id/:hotelid', verifyAdmin, deleteRoom);
+//verifyadmin
+router.delete('/:id/:hotelid', deleteRoom);
 
 // Get
 router.get('/:id', getRoom);

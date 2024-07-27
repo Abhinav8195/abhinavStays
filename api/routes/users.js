@@ -17,9 +17,10 @@ router.get('/',getUsers)
 //update
 router.put('/:id',verifyUser,upadteUser)
 //delete
-router.delete('/:id',verifyAdmin,deleteUser)
+//verifyadmin in last 2 
+router.delete('/:id',deleteUser)
 //get
-router.get('/:id',verifyAdmin,getUser)
+router.get('/:id',getUser)
 //get all
 
 
