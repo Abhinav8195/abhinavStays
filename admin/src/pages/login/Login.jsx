@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-        const res = await axios.post("/api/auth/login", credentials);
+        const res = await axios.post("https://abhinavstays.onrender.com/api/auth/login", credentials);
 
         if (res.data.isAdmin) {
             localStorage.setItem("accessToken", res.data.accessToken);
