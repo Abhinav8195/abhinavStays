@@ -24,13 +24,8 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post("https://abhinavstays.onrender.com/api/auth/login", credentials);
-      console.log(res.data); // Debug: Check the response
       if (res.data.isAdmin) {
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-
-        // Store token in local storage
-        localStorage.setItem("access_token", res.data.token);
-        console.log("Token stored:", res.data.token); // Debug: Verify token storage
 
         navigate("/");
       } else {
