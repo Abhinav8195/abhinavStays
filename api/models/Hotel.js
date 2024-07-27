@@ -47,6 +47,10 @@ const HotelSchema = new mongoose.Schema({
     featured:{
         type:Boolean,
         default:false
-    }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now 
+      },
 });
 module.exports= mongoose.model('Hotel',HotelSchema)
