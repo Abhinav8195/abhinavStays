@@ -2,22 +2,36 @@ import "./newHotel.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { hotelInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
 
 const NewHotel = () => {
   const [files, setFiles] = useState("");
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false); // State to store admin status
+  const navigate = useNavigate(); // For navigation
 
-  const { data, loading, error } = useFetch("https://abhinavstays.onrender.com/api/rooms");
+  const { data, loading, error } = useFetch("/api/rooms");
+
+  useEffect(() => {
+    // Check if the user is an admin from local storage
+    const adminStatus = localStorage.getItem("isAdmin");
+    if (adminStatus !== "true") {
+      // If not an admin, redirect to an unauthorized page or show a message
+      navigate("/unauthorized"); // Change this to your unauthorized route
+    } else {
+      setIsAdmin(true); // Set admin status
+    }
+  }, [navigate]);
 
   const handleChange = (e) => {
     let value = e.target.value;
     if (e.target.id === 'city') {
-        value = value.charAt(0).toUpperCase() + value.slice(1);
+      value = value.charAt(0).toUpperCase() + value.slice(1);
     }
     setInfo((prev) => ({ ...prev, [e.target.id]: value }));
   };
@@ -29,11 +43,16 @@ const NewHotel = () => {
     );
     setRooms(value);
   };
-  
-  console.log(files)
 
   const handleClick = async (e) => {
     e.preventDefault();
+
+    // Check if the user is an admin before proceeding
+    if (!isAdmin) {
+      alert("You are not authorized to perform this action."); // Show alert or message
+      return; // Prevent submission
+    }
+
     try {
       const list = await Promise.all(
         Object.values(files).map(async (file) => {
@@ -56,9 +75,13 @@ const NewHotel = () => {
         photos: list,
       };
 
-      await axios.post("https://abhinavstays.onrender.com/api/hotels", newhotel);
-    } catch (err) {console.log(err)}
+      await axios.post("/api/hotels", newhotel);
+      alert("Hotel added successfully!"); // Show success message
+    } catch (err) {
+      console.log(err);
+    }
   };
+
   return (
     <div className="new">
       <Sidebar />
