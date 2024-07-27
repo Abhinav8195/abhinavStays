@@ -1,3 +1,4 @@
+// hooks/useFetch.js
 import axios from 'axios';
 import { useState, useEffect } from "react";
 
@@ -9,12 +10,11 @@ const useFetch = (url) => {
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
-            const token = localStorage.getItem("accessToken"); // Get the access token
-
+            const token = localStorage.getItem("accessToken"); // Retrieve the token from local storage
             try {
                 const res = await axios.get(url, {
                     headers: {
-                        Authorization: `Bearer ${token}`, // Include the token in the headers
+                        Authorization: `Bearer ${token}`, // Set the Authorization header
                     },
                 });
                 setData(res.data);
@@ -23,18 +23,16 @@ const useFetch = (url) => {
             }
             setLoading(false);
         };
-
         fetchData();
     }, [url]);
 
     const reFetch = async () => {
         setLoading(true);
-        const token = localStorage.getItem("accessToken"); // Get the access token
-
+        const token = localStorage.getItem("accessToken"); // Retrieve the token from local storage
         try {
             const res = await axios.get(url, {
                 headers: {
-                    Authorization: `Bearer ${token}`, // Include the token in the headers
+                    Authorization: `Bearer ${token}`, // Set the Authorization header
                 },
             });
             setData(res.data);

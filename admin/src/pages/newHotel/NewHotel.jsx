@@ -29,11 +29,10 @@ const NewHotel = () => {
     );
     setRooms(value);
   };
-  
-  console.log(files)
 
   const handleClick = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("accessToken"); // Retrieve the token from local storage
     try {
       const list = await Promise.all(
         Object.values(files).map(async (file) => {
@@ -56,9 +55,16 @@ const NewHotel = () => {
         photos: list,
       };
 
-      await axios.post("https://abhinavstays.onrender.com/api/hotels", newhotel);
-    } catch (err) {console.log(err)}
+      await axios.post("https://abhinavstays.onrender.com/api/hotels", newhotel, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the headers
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
+
   return (
     <div className="new">
       <Sidebar />
