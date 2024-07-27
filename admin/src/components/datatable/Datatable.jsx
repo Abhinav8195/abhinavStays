@@ -52,7 +52,7 @@ const Datatable = ({columns}) => {
     <div className="datatable">
       <div className="datatableTitle">
          {path}
-        <Link to={`https://abhinavstays.onrender.com/${path}/new`} className="link">
+        <Link to={`/${path}/new`} className="link">
           Add New
         </Link>
       </div>
