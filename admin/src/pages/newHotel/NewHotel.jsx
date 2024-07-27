@@ -12,7 +12,7 @@ const NewHotel = () => {
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
 
-  const { data, loading, error } = useFetch("/api/rooms");
+  const { data, loading, error } = useFetch("https://abhinavstays.onrender.com/api/rooms");
 
   const handleChange = (e) => {
     let value = e.target.value;
@@ -56,7 +56,7 @@ const NewHotel = () => {
         photos: list,
       };
 
-      await axios.post("/api/hotels", newhotel);
+      await axios.post("https://abhinavstays.onrender.com/api/hotels", newhotel);
     } catch (err) {console.log(err)}
   };
   return (

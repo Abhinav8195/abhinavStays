@@ -10,7 +10,7 @@ const NewRoom = () => {
   const [info, setInfo] = useState({});
   const [hotelId, setHotelId] = useState("");
   const [rooms, setRooms] = useState("");
-  const { data, loading, error } = useFetch("/api/hotels");
+  const { data, loading, error } = useFetch("https://abhinavstays.onrender.com/api/hotels");
 
   useEffect(() => {
     if (error) {
@@ -29,7 +29,7 @@ const NewRoom = () => {
     e.preventDefault();
     const roomNumbers = rooms.split(",").map((room) => ({ number: room.trim() }));
     try {
-      await axios.post(`/api/rooms/${hotelId}`, { ...info, roomNumbers });
+      await axios.post(`https://abhinavstays.onrender.com/api/rooms/${hotelId}`, { ...info, roomNumbers });
     } catch (err) {
       console.log(err);
     }

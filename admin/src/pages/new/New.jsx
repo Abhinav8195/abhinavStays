@@ -37,7 +37,7 @@ const New = ({ inputs, title }) => {
         img: url,
       };
 
-      await axios.post("/api/auth/register", newUser);
+      await axios.post("https://abhinavstays.onrender.com/api/auth/register", newUser);
     } catch (err) {
       console.error("Error during file upload:", err);
     }
