@@ -1,42 +1,50 @@
-
-import axios from 'axios'
+import axios from 'axios';
 import { useState, useEffect } from "react";
 
+const useFetch = (url) => {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
 
-
-const useFetch=(url)=>{
-    const [data,setData]=useState([]);
-    const [loading,setLoading]=useState(false);
-    const [error,setError]=useState(false);
-
-    useEffect(()=>{
-        const fetchData = async()=>{
+    useEffect(() => {
+        const fetchData = async () => {
             setLoading(true);
-           try{
-            const res = await axios.get(url)
-            setData(res.data)
-           }catch(err){
-            setError(err)
-           }
-           setLoading(false)
+            const token = localStorage.getItem("accessToken"); // Get the access token
+
+            try {
+                const res = await axios.get(url, {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Include the token in the headers
+                    },
+                });
+                setData(res.data);
+            } catch (err) {
+                setError(err);
+            }
+            setLoading(false);
         };
+
         fetchData();
-    },[url])
+    }, [url]);
 
+    const reFetch = async () => {
+        setLoading(true);
+        const token = localStorage.getItem("accessToken"); // Get the access token
 
-const reFetch = async()=>{
-    setLoading(true);
-   try{
-    const res =await axios.get(url)
-    setData(res.data)
-   }catch(err){
-    setError(err)
-   }
-   setLoading(false)
-}
+        try {
+            const res = await axios.get(url, {
+                headers: {
+                    Authorization: `Bearer ${token}`, // Include the token in the headers
+                },
+            });
+            setData(res.data);
+        } catch (err) {
+            setError(err);
+        }
+        setLoading(false);
+    };
 
-return {data,loading,error,reFetch};
+    return { data, loading, error, reFetch };
+};
 
-}
-
-export default useFetch
+export default useFetch;

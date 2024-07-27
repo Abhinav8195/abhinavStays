@@ -6,15 +6,15 @@ import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import axios from 'axios'
 
-const Datatable = ({columns}) => {
+const Datatable = ({ columns }) => {
   const location = useLocation();
-  const path = location.pathname.split("/")[1]
-  const [list,setList]= useState([]);
-  const {data,loading,error} = useFetch(`https://abhinavstays.onrender.com/api/${path}`)
+  const path = location.pathname.split("/")[1];
+  const [list, setList] = useState([]);
+  const { data, loading, error } = useFetch(`https://abhinavstays.onrender.com/api/${path}`);
 
   const handleDelete = async (id) => {
-    const token = localStorage.getItem("access_token");
-  
+    const token = localStorage.getItem("accessToken"); 
+
     try {
       await axios.delete(`https://abhinavstays.onrender.com/api/${path}/${id}`, {
         headers: {
@@ -27,10 +27,9 @@ const Datatable = ({columns}) => {
     }
   };
 
-
-  useEffect(()=>{
-    setList(data)
-  },[data])
+  useEffect(() => {
+    setList(data);
+  }, [data]);
 
   const actionColumn = [
     {
@@ -54,6 +53,7 @@ const Datatable = ({columns}) => {
       },
     },
   ];
+
   return (
     <div className="datatable">
       <div className="datatableTitle">
