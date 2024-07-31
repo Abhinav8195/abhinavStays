@@ -61,11 +61,16 @@ const Header = ({ type }) => {
                         <FontAwesomeIcon icon={faBed} />
                         <span>Stays</span>
                     </div>
-                    <div className="headerListItem">
-                        <Link to={'https://abhinav-airways.vercel.app/'}>
-                        <FontAwesomeIcon icon={faPlane} />
-                       <span>Flights</span></Link>
-                    </div>
+                    <Link 
+                      to={'https://abhinav-airways.vercel.app/'} 
+                      style={{ textDecoration: 'none' }} 
+                    >
+                      <div className="headerListItem" style={{ color: 'white', display: 'flex', alignItems: 'center' }}>
+                        <FontAwesomeIcon icon={faPlane} style={{ marginRight: '8px', color: 'white' }} />
+                        <span style={{ color: 'white' }}>Flights</span>
+                      </div>
+                    </Link>
+
                     <div className="headerListItem">
                         <FontAwesomeIcon icon={faCar} />
                         <span>Car rentals</span>
