@@ -6,7 +6,7 @@ import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { format } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import { SearchContext } from '../../context/SearchContext';
 import { AuthContext } from '../../context/AuthContext';
 
@@ -63,7 +63,7 @@ const Header = ({ type }) => {
                     </div>
                     <div className="headerListItem">
                         <FontAwesomeIcon icon={faPlane} />
-                        <span>Flights</span>
+                       <Link to={'https://abhinav-airways.vercel.app/'}> <span>Flights</span></Link>
                     </div>
                     <div className="headerListItem">
                         <FontAwesomeIcon icon={faCar} />
