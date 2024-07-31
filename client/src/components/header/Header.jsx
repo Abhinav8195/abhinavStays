@@ -62,8 +62,9 @@ const Header = ({ type }) => {
                         <span>Stays</span>
                     </div>
                     <div className="headerListItem">
+                        <Link to={'https://abhinav-airways.vercel.app/'}>
                         <FontAwesomeIcon icon={faPlane} />
-                       <Link to={'https://abhinav-airways.vercel.app/'}> <span>Flights</span></Link>
+                       <span>Flights</span></Link>
                     </div>
                     <div className="headerListItem">
                         <FontAwesomeIcon icon={faCar} />
